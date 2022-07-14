@@ -1,6 +1,5 @@
 package com.priceline.chutes;
-
-import java.util.Random;
+import java.util.*;
 
 public class Game {
 
@@ -11,20 +10,28 @@ public class Game {
     Player torvalds = new Player("torvalds");
 
     public Player playGame(){
-        Player[] players = new Player[]{dijkstra, turing, hopper, torvalds};
+         Player[] players = new Player[]{dijkstra, turing, hopper, torvalds};
         Board board = new Board();
 
         while(true){
             for (Player currentPlayer : players) {
                 int spinResult = spin();
+                System.out.println("Current Player : " + currentPlayer.getName());
+               // System.out.println("Spin result :" + spinResult);
                 int nextPosition = currentPlayer.getPosition() + spinResult;
                 if (nextPosition > 100){
-                    break;
+                    continue;
+                    /*
+                     'break;'
+                     stops the other players turn until current player moves or wins
+                     replacing it with 'continue;' starts the next iteration upon invocation
+                     */
                 }
                 BoardSquare nextSquare = board.getSquareAtPosition(nextPosition);
                 nextPosition += nextSquare.getNumberSquaresToSkip();
                 if (nextPosition < 100) {
                     currentPlayer.setPosition(nextPosition);
+                   // System.out.println("Current Position: " + currentPlayer.getPosition());
                 } else if (nextPosition == 100) {
                     return currentPlayer;//The winner!
                 }
