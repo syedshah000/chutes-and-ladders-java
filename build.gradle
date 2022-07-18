@@ -20,5 +20,5 @@ test {
 }
 
 application {
-    mainClass.set("com.priceline.chutes.Game")
+    mainClass.set("com.priceline.chutes.RunnerClass")
 }
